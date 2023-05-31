@@ -2,7 +2,7 @@ const axios = require('axios');
 const { useState } = require('react');
 
 const [articles, setArticles] = useState([]);
-const getNews = () => {
+export const getNews = () => {
   // Make a request for a user with a given ID
   axios
     .get('https://newsapi.org/v2/everything')
