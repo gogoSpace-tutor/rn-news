@@ -14,11 +14,13 @@ const Article = (props) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.description}>{props.description}</Text>
+        <Text style={styles.description} numberOfLines={3}>
+          {props.description}
+        </Text>
 
         <View style={styles.data}>
           <Text style={styles.heading}>
-            by: <Text style={styles.value}>{props.author}</Text>
+            by: <Text style={styles.author}>{props.author}</Text>
           </Text>
           <Text style={styles.date}>{props.publishedAt}</Text>
         </View>
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   date: {
     fontWeight: '700',
     color: 'red',
-    fontSize: 16,
+    fontSize: 14,
   },
   source: {
     marginTop: 10,

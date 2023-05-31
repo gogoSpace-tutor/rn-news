@@ -1,13 +1,14 @@
 const axios = require('axios');
-const { useState } = require('react');
-
 const [articles, setArticles] = useState([]);
+
 export const getNews = () => {
-  // Make a request for a user with a given ID
   axios
-    .get('https://newsapi.org/v2/everything')
+    .get(
+      'https://newsapi.org/v2/everything?q=bitcoin&apiKey=393772655bb24d5aab65ed7352adba89'
+    )
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data.articles);
+      setArticles(response.data.articles);
     })
     .catch(function (error) {
       console.log(error);

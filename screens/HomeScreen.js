@@ -41,6 +41,7 @@ const HomeScreen = () => {
             title={item.title}
             description={item.description}
             author={item.author}
+            publishedAt={item.publishedAt}
             sourceName={item.source.name}
           />
         )}
