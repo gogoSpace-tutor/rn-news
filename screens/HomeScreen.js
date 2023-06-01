@@ -8,16 +8,22 @@ import Loader from '../components/Loader';
 const HomeScreen = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(10);
 
   useEffect(() => {
     const fetchDataAndSetArticles = async () => {
-      const data = await fetchData('bitcoin');
-      setArticles(data);
+      const data = await fetchData('bitcoin', page, pageSize);
+      setArticles((prevArticles) => [...prevArticles, ...data]);
       setLoading(false);
     };
 
     fetchDataAndSetArticles();
-  }, []);
+  }, [page, pageSize]);
+
+  const loadMoreArticles = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   const renderItem = ({ item }) => (
     <Article
@@ -43,6 +49,8 @@ const HomeScreen = () => {
           renderItem={renderItem}
           keyExtractor={(item) => item.title}
           ListEmptyComponent={<Text>No articles available.</Text>}
+          onEndReached={loadMoreArticles} // Implement infinite scrolling
+          onEndReachedThreshold={0.5}
         />
       )}
     </SafeAreaView>
