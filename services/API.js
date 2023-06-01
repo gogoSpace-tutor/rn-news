@@ -10,10 +10,30 @@ export const getNews = (searchText) => {
   });
 };
 
-export const fetchData = async (searchText) => {
+export const fetchData = async (
+  searchText,
+  page,
+  pageSize,
+  sortBy,
+  sortOrder
+) => {
   try {
     const response = await getNews(searchText);
-    return response.data.articles;
+    let articles = response.data.articles;
+
+    articles = articles.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a[sortBy] > b[sortBy] ? 1 : -1;
+      } else {
+        return a[sortBy] < b[sortBy] ? 1 : -1;
+      }
+    });
+
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    articles = articles.slice(startIndex, endIndex);
+
+    return articles;
   } catch (error) {
     console.log(error);
     return [];
