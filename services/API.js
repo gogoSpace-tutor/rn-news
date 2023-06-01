@@ -5,7 +5,7 @@ export const getNews = (searchText) => {
   return axios.get(BASE_URL, {
     params: {
       q: searchText,
-      apiKey: '393772655bb24d5aab65ed7352adba89',
+      apiKey: 'b4800d6de30f43328c0d6145f8edcf40',
     },
   });
 };

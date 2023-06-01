@@ -1,11 +1,4 @@
-import {
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import moment from 'moment';
 import * as WebBrowser from 'expo-web-browser';
@@ -60,7 +53,6 @@ export default Article;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginBottom: 20,
@@ -105,7 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
-  heading: {},
   author: {
     fontWeight: '700',
   },

@@ -1,11 +1,4 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import { fetchData } from '../services/api';

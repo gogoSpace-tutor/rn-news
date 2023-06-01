@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Article from '../components/Article';
 import { fetchData } from '../services/api';

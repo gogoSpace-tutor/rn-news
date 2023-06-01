@@ -6,6 +6,7 @@ const SearchBar = (props) => {
     <View>
       <TextInput
         placeholder="Search"
+        placeholderTextColor="#fff"
         style={styles.input}
         value={props.searchText}
         onChangeText={(text) => props.setSearchText(text)}
@@ -22,11 +23,12 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   input: {
-    backgroundColor: '#ffc300',
+    backgroundColor: 'red',
     padding: 10,
     margin: 10,
     borderRadius: 10,
-    color: '#000',
+    color: '#fff',
+    fontWeight: 'bold',
     borderWidth: 1,
   },
 });
