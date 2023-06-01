@@ -1,39 +1,39 @@
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import moment from 'moment';
 
-// const newsImage = {
-//   uri: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60',
-// };
-
-const Article = (props) => {
-  // const newsImage = { uri: props.urlToImage };
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: props.urlToImage }} style={styles.image} />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.description} numberOfLines={3}>
-          {props.description}
-        </Text>
-
-        <View style={styles.data}>
-          <Text style={styles.heading}>
-            by: <Text style={styles.author}>{props.author}</Text>
-          </Text>
-          <Text style={styles.date}>{props.publishedAt}</Text>
+const Article = React.memo(
+  ({ urlToImage, title, description, author, publishedAt, sourceName }) => {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: urlToImage }} style={styles.image} />
         </View>
-
-        <View style={styles.sourceContainer}>
-          <Text>
-            source: <Text style={styles.source}>{props.sourceName}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description} numberOfLines={3}>
+            {description}
           </Text>
+
+          <View style={styles.data}>
+            <Text style={styles.heading}>
+              by: <Text style={styles.author}>{author}</Text>
+            </Text>
+            <Text style={styles.date}>
+              {moment(publishedAt).format('MMMM Do YYYY')}
+            </Text>
+          </View>
+
+          <View style={styles.sourceContainer}>
+            <Text>
+              source: <Text style={styles.source}>{sourceName}</Text>
+            </Text>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
-  );
-};
+      </SafeAreaView>
+    );
+  }
+);
 
 export default Article;
 

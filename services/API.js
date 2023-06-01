@@ -1,27 +1,21 @@
-const axios = require('axios');
-const [articles, setArticles] = useState([]);
+import axios from 'axios';
 
-export const getNews = () => {
-  axios
-    .get(
-      'https://newsapi.org/v2/everything?q=bitcoin&apiKey=393772655bb24d5aab65ed7352adba89'
-    )
-    .then(function (response) {
-      // console.log(response.data.articles);
-      setArticles(response.data.articles);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .finally(function () {});
+export const getNews = (searchText) => {
+  const BASE_URL = 'https://newsapi.org/v2/everything';
+  return axios.get(BASE_URL, {
+    params: {
+      q: searchText,
+      apiKey: '393772655bb24d5aab65ed7352adba89',
+    },
+  });
+};
 
-  // Want to use async/await? Add the `async` keyword to your outer function/method.
-  // async function getUser() {
-  //   try {
-  //     const response = await axios.get('/user?ID=12345');
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+export const fetchData = async (searchText) => {
+  try {
+    const response = await getNews(searchText);
+    return response.data.articles;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 };
