@@ -1,8 +1,15 @@
-import { FlatList, SafeAreaView, StyleSheet, Text } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Article from '../components/Article';
 import { fetchData } from '../services/api';
 import Error from '../components/Error';
+import Loader from '../components/Loader';
 
 const HomeScreen = () => {
   const [articles, setArticles] = useState([]);
@@ -18,29 +25,29 @@ const HomeScreen = () => {
     fetchDataAndSetArticles();
   }, []);
 
+  const renderItem = ({ item }) => (
+    <Article
+      urlToImage={item.urlToImage}
+      title={item.title}
+      description={item.description}
+      author={item.author}
+      publishedAt={item.publishedAt}
+      sourceName={item.source.name}
+      url={item.url}
+    />
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       {loading ? (
-        <Text>Loading...</Text>
+        <Loader />
       ) : articles.length === 0 ? (
-        <Error />
+        <Error text="No articles available..." />
       ) : (
         <FlatList
           data={articles}
-          renderItem={({ item }) => (
-            <Article
-              urlToImage={item.urlToImage}
-              title={item.title}
-              description={item.description}
-              author={item.author}
-              publishedAt={item.publishedAt}
-              sourceName={item.source.name}
-            />
-          )}
+          renderItem={renderItem}
           keyExtractor={(item) => item.title}
-          initialNumToRender={10}
-          windowSize={5}
-          maxToRenderPerBatch={5}
           ListEmptyComponent={<Text>No articles available.</Text>}
         />
       )}

@@ -1,11 +1,32 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import moment from 'moment';
+import * as WebBrowser from 'expo-web-browser';
 
 const Article = React.memo(
-  ({ urlToImage, title, description, author, publishedAt, sourceName }) => {
+  ({
+    urlToImage,
+    title,
+    description,
+    author,
+    publishedAt,
+    sourceName,
+    url,
+  }) => {
+    const openNews = async () => {
+      if (url) {
+        let result = await WebBrowser.openBrowserAsync(url);
+      }
+    };
     return (
-      <SafeAreaView style={styles.container}>
+      <Pressable style={styles.container} onPress={openNews}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: urlToImage }} style={styles.image} />
         </View>
@@ -30,7 +51,7 @@ const Article = React.memo(
             </Text>
           </View>
         </View>
-      </SafeAreaView>
+      </Pressable>
     );
   }
 );

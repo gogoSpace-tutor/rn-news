@@ -1,17 +1,22 @@
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import { fetchData } from '../services/api';
 import Article from '../components/Article';
 import Error from '../components/Error';
+import Loader from '../components/Loader';
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const newsImage = {
-    uri: 'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60',
-  };
 
   const fetchDataAndSetArticles = async () => {
     try {
@@ -38,9 +43,9 @@ const SearchScreen = () => {
         onSubmit={fetchDataAndSetArticles}
       />
       {loading ? (
-        <Text>Loading...</Text>
+        <Loader />
       ) : articles.length === 0 ? (
-        <Error />
+        <Error text="Type something to find the articles..." />
       ) : (
         <FlatList
           data={articles}
@@ -52,6 +57,7 @@ const SearchScreen = () => {
               author={item.author}
               publishedAt={item.publishedAt}
               sourceName={item.source.name}
+              url={item.url}
             />
           )}
           keyExtractor={(item) => item.title}
