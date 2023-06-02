@@ -11,8 +11,6 @@ import Article from '../components/Article';
 import { fetchData } from '../services/api';
 import Error from '../components/Error';
 import Loader from '../components/Loader';
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 
 const HomeScreen = () => {
   const [articles, setArticles] = useState([]);
@@ -33,7 +31,7 @@ const HomeScreen = () => {
       );
       setArticles((prevArticles) => [
         ...prevArticles,
-        ...data.map((article) => ({ ...article, id: uuidv4() })),
+        ...data.map((article, index) => ({ ...article, id: index.toString() })),
       ]);
       setLoading(false);
     };

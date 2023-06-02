@@ -33,7 +33,7 @@ const SearchScreen = () => {
       <SearchBar
         searchText={searchText}
         setSearchText={setSearchText}
-        onSubmit={fetchDataAndSetArticles}
+        onSubmit={() => fetchDataAndSetArticles()}
       />
       {loading ? (
         <Loader />
@@ -42,7 +42,7 @@ const SearchScreen = () => {
       ) : (
         <FlatList
           data={articles}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <Article
               urlToImage={item.urlToImage}
               title={item.title}
@@ -51,9 +51,10 @@ const SearchScreen = () => {
               publishedAt={item.publishedAt}
               sourceName={item.source.name}
               url={item.url}
+              key={index.toString()}
             />
           )}
-          keyExtractor={(item) => item.title}
+          keyExtractor={(item, index) => index.toString()}
           initialNumToRender={10}
           windowSize={5}
           maxToRenderPerBatch={5}
